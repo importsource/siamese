@@ -1,7 +1,7 @@
 package com.importsource.siamese.client;
 
-import com.importsource.rpc.RPC;
 import com.importsource.siamese.SNode;
+import com.importsource.siamese.SiameseRPC;
 import com.importsource.siamese.service.DefaultService;
 
 /**
@@ -12,7 +12,7 @@ import com.importsource.siamese.service.DefaultService;
  */
 public class MainClient {
 	public static void main(String[] args) {
-			DefaultService defaultService=RPC.getProxy(DefaultService.class, "127.0.0.1", 20382);
+			DefaultService defaultService =SiameseRPC.getSiameseProxy(DefaultService.class);
 			SNode sNode=new SNode();
 			sNode.setParent("root");
 			System.out.println(defaultService.add("app7", sNode));
@@ -21,4 +21,5 @@ public class MainClient {
 			
 			System.out.println(defaultService.listByApp("root"));
 	}
+
 }
