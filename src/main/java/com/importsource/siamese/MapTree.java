@@ -15,7 +15,10 @@ import java.util.TreeMap;
  *
  */
 public class MapTree {
-	private static Map<String, String> map;
+	private static Map<String, String> map=new TreeMap<String, String>();
+	static{
+		map.put("root", "null");
+	}
 	public static void main(String[] args) {
 		/*
 		 * Map<String, Node> map=new HashMap<String,Node>(); map.put("/",new
@@ -45,7 +48,6 @@ public class MapTree {
 	}
 
 	private static Map<String, String> init() {
-		Map<String, String> map = new TreeMap<String, String>();
 		map.put("root", "null");
 		map.put("app1", "root");
 		map.put("app2", "root");

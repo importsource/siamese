@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 如果是文件，那么要指定文件目录。文件实现提供者。文件名生成规则。每个文件大小 -->
+<configuration>
+    <!--日志输出实现提供者-->
+	<property>
+		<name>clog.logger</name>
+		<value>ConsoleLogger</value>
+	</property>
+	<!--日志级别 i w e-->
+	<property>
+		<name>clog.level</name>
+		<value>info</value>
+	</property>
+	<!-- 文件的目录 -->
+	<property>
+		<name>clog.dir</name>
+		<value>/log/</value>
+	</property>
+	<!-- 文件的前缀 -->
+	<property>
+		<name>clog.file.pre</name>
+		<value>test</value>
+	</property>
+
+</configuration>
