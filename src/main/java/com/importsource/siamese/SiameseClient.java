@@ -1,5 +1,8 @@
 package com.importsource.siamese;
 
+import com.importsource.siamese.watcher.WatchedEvent;
+import com.importsource.siamese.watcher.Watcher;
+
 /**
  * 客户端使用示例
  * @author Hezf

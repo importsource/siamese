@@ -5,6 +5,17 @@ package com.importsource.siamese;
  * @author Hezf
  */
 public enum CreateMode {
-	PERSISTENT
+	/**
+	 * 持久化存儲
+	 */
+	PERSISTENT,
+	/**
+	 * 臨時存儲
+	 */
+	EPHEMERAL,
+	/**
+	 *  a node like this :item0000000004,item0000000005,item0000000006
+	 */
+	SEQUENCE
 
 }
