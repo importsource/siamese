@@ -11,7 +11,7 @@ import com.importsource.siamese.DefaultScannerUtil;
  * 
  * rpc 服务启动器
  * @author Hezf
- *
+ * 
  */
 public class MainServer {
 	public static void main(String[] args) {

@@ -15,9 +15,12 @@ import java.util.TreeMap;
  *
  */
 public class MapTree {
-	private static Map<String, String> map=new TreeMap<String, String>();
+	private static Map<String, SNode> map=new TreeMap<String, SNode>();
 	static{
-		map.put("root", "null");
+		SNode sNode=new SNode();
+		sNode.setName("root");
+		sNode.setParent("null");
+		map.put("root", sNode);
 	}
 	public static void main(String[] args) {
 		/*
@@ -32,23 +35,23 @@ public class MapTree {
 		set=map.entrySet();
 
 		// 得到根节点
-		Entry<String, String> root=getRoot(map);
+		Entry<String, SNode> root=getRoot();
 		System.out.println(root.getKey());
 		findSub(root,"---");
 		//map.remove("192.168.1.104");
 		System.out.println("app1下的节点：");
-	    List<Entry<String, String>> app1s=listbyApp("app1");
+	    List<SNode> app1s=listbyApp("app1");
 	    for (Iterator iterator = app1s.iterator(); iterator.hasNext();) {
-			Entry<String, String> entry = (Entry<String, String>) iterator.next();
-			System.out.println(entry.getKey());
+			SNode node = (SNode) iterator.next();
+			System.out.println(node.getName());
 		}
 	    
 	    
 
 	}
 
-	private static Map<String, String> init() {
-		map.put("root", "null");
+	private static Map<String, SNode> init() {
+		/*map.put("root", "null");
 		map.put("app1", "root");
 		map.put("app2", "root");
 		map.put("app3", "root");
@@ -73,19 +76,21 @@ public class MapTree {
 		map.put("c7", "c5");
 		map.put("c8", "c5");
 		map.put("c9", "c5");
-		return map;
+		return map;*/
+		return null;
 	}
-	static Set<Entry<String, String>> set;
+	static Set<Entry<String, SNode>> set;
 	
 	
 
-	private static void findSub(Entry<String, String> root,String deep) {
+	private static void findSub(Entry<String, SNode> root,String deep) {
 		
 		for (Iterator iterator = set.iterator(); iterator.hasNext();) {
-			Entry<String, String> entry = (Entry<String, String>) iterator.next();
-			String val=entry.getValue();
+			Entry<String, SNode> entry = (Entry<String, SNode>) iterator.next();
+			SNode sNode=entry.getValue();
+			String parent=sNode.getParent();
 			String key=entry.getKey();
-			if(val.equals(root.getKey())){
+			if(parent.equals(root.getKey())){
 				System.out.println(deep+key);
 				/*for(Iterator iterator1 = set.iterator(); iterator1.hasNext();){
 					Entry<String, String> entry1= (Entry<String, String>) iterator1.next();
@@ -108,16 +113,26 @@ public class MapTree {
 		
 	}
 
-	private static Entry<String, String> getRoot(Map<String, String> map) {
-		Set<Entry<String, String>> set=map.entrySet();
+	public static Entry<String, SNode> getRoot() {
+		Set<Entry<String, SNode>> set=map.entrySet();
 		for (Iterator iterator = set.iterator(); iterator.hasNext();) {
-			Entry<String, String> entry = (Entry<String, String>) iterator.next();
-			String val=entry.getValue();
-			if(val.equals("null")){
+			Entry<String, SNode> entry = (Entry<String, SNode>) iterator.next();
+			SNode val=entry.getValue();
+			String parent=val.getParent();
+			if(val.equals(parent)){
 				return entry;
 			}
 		}
 		return null;
+	}
+	
+	/**
+	 * 得到指定的节点
+	 * @param key
+	 * @return
+	 */
+	public static SNode get(String key){
+		return map.get(key);
 	}
 	
 	/**
@@ -126,15 +141,36 @@ public class MapTree {
 	 * @param parentKey
 	 * @return
 	 */
-	public static String add(String key,String parentKey){
-		if(map.containsKey(key)){
-			throw new  IllegalArgumentException("The key is existed");
+	public static SNode add(String key,SNode sNode){
+		if(sNode==null){
+			throw new IllegalArgumentException("SNode can't be null");
 		}
+		/*if(map.containsKey(key)){
+			throw new  IllegalArgumentException("The key is existed");
+		}*/
 		
-		if(!isParent(parentKey)){
+		if(!isParent(sNode.getParent())){
 			throw new IllegalArgumentException("The parent key is not existed!");
 		}
-		return map.put(key, parentKey);
+		 map.put(key, sNode);
+		 return sNode;
+	}
+	
+	/**
+	 * 更新
+	 * @param key
+	 * @param parentKey
+	 * @return
+	 */
+	public static SNode update(String key,SNode sNode){
+		if(sNode==null){
+			throw new IllegalArgumentException("SNode can't be null");
+		}
+		if(!isParent(sNode.getParent())){
+			throw new IllegalArgumentException("The parent key is not existed!");
+		}
+		 map.put(key, sNode);
+		 return sNode;
 	}
 	
 	/**
@@ -142,14 +178,15 @@ public class MapTree {
 	 * @param key
 	 * @return
 	 */
-	public static List<Entry<String, String>> listbyApp(String app){
-		Set<Entry<String, String>> set=map.entrySet();
-		List<Entry<String, String>> newSet=new ArrayList<Entry<String, String>>();
+	public static List<SNode> listbyApp(String app){
+		Set<Entry<String, SNode>> set=map.entrySet();
+		List<SNode> newSet=new ArrayList<SNode>();
 		for (Iterator iterator = set.iterator(); iterator.hasNext();) {
-			Entry<String, String> entry = (Entry<String, String>) iterator.next();
-			String val=entry.getValue();
-			if(val.equals(app)){
-				newSet.add(entry);
+			Entry<String, SNode> entry = (Entry<String, SNode>) iterator.next();
+			SNode sNode=entry.getValue();
+			String parent=sNode.getParent();
+			if(parent.equals(app)){
+				newSet.add(sNode);
 			}
 		}
 		return newSet;
@@ -160,8 +197,10 @@ public class MapTree {
 	 * @param key 节点key
 	 * @return
 	 */
-	public static String remove(String key){
-		return map.remove(key);
+	public static SNode remove(String key){
+		 SNode sNode=map.get(key);
+		 map.remove(key);
+		 return sNode;
 	}
 
 	private static boolean isParent(String parentKey) {

@@ -12,14 +12,30 @@ import com.importsource.siamese.service.DefaultService;
  */
 public class MainClient {
 	public static void main(String[] args) {
+		
 			DefaultService defaultService =SiameseRPC.getSiameseProxy(DefaultService.class);
-			SNode sNode=new SNode();
-			sNode.setParent("root");
-			System.out.println(defaultService.add("app7", sNode));
-			System.out.println(defaultService.add("app8", sNode));
-			System.out.println(defaultService.add("app9", sNode));
+			SNode sNode4=new SNode();
+			sNode4.setParent("root");
+			sNode4.setName("app4");
+			sNode4.setLabel("label4");
+
+			SNode sNode5=new SNode();
+			sNode5.setParent("root");
+			sNode5.setName("app5");
+			sNode5.setLabel("label5");
+			
+			SNode sNode6=new SNode();
+			sNode6.setParent("root");
+			sNode6.setName("app6");
+			sNode6.setLabel("label6");
+			
+			System.out.println(defaultService.add("app4", sNode4));
+			System.out.println(defaultService.add("app5", sNode5));
+			System.out.println(defaultService.add("app6", sNode6));
 			
 			System.out.println(defaultService.listByApp("root"));
+			
+			
 	}
 
 }
