@@ -5,6 +5,11 @@ import java.util.List;
 
 import com.importsource.siamese.MapTree;
 import com.importsource.siamese.SNode;
+import com.importsource.siamese.SiameseRPC;
+import com.importsource.siamese.watcher.AppWatcher;
+import com.importsource.siamese.watcher.WatchedEvent;
+import com.importsource.siamese.watcher.Watcher;
+import com.importsource.siamese.watcher.WatcherPool;
 
 /**
  * 实现部分
@@ -18,11 +23,15 @@ public class DefaultServiceImpl implements DefaultService {
 	}
 
 	public List<SNode> listByApp(String app) {
+		System.out.println("来请求列表来了");
 		return MapTree.listbyApp(app);
 	}
 
 	public String remove(String key) {
-		return MapTree.remove(key).toString();
+		String result= MapTree.remove(key).toString();
+		WatchedEvent event=new WatchedEvent();
+		event.notifyAllObservers();
+		return result;
 	}
 
 	public String update(String key, SNode sNode) {
@@ -32,6 +41,21 @@ public class DefaultServiceImpl implements DefaultService {
 	public SNode get(String key) {
 		return MapTree.get(key);
 	}
+
+	public void attach(Watcher watcher) {
+		WatchedEvent event=new WatchedEvent();
+		event.attach(watcher);
+		
+		System.out.println("WatcherPool.observers.size():"+WatcherPool.observers.size());
+		
+	}
+
+	public void process(WatchedEvent event) {
+		
+		
+	}
+
+	
 	
 
 }

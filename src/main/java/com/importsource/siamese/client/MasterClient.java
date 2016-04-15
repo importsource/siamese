@@ -10,7 +10,7 @@ import com.importsource.siamese.service.DefaultService;
  * @author Hezf
  *
  */
-public class MainClient {
+public class MasterClient {
 	public static void main(String[] args) {
 		
 			DefaultService defaultService =SiameseRPC.getSiameseProxy(DefaultService.class);
@@ -34,6 +34,8 @@ public class MainClient {
 			System.out.println(defaultService.add("app6", sNode6));
 			
 			System.out.println(defaultService.listByApp("root"));
+			
+			defaultService.remove("app4");
 			
 			
 	}

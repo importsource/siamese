@@ -1,5 +1,6 @@
 package com.importsource.siamese;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -14,7 +15,8 @@ import java.util.TreeMap;
  * @author Hezf
  *
  */
-public class MapTree {
+public class MapTree implements Serializable{
+	private static final long serialVersionUID = 1435403724318601149L;
 	private static Map<String, SNode> map=new TreeMap<String, SNode>();
 	static{
 		SNode sNode=new SNode();

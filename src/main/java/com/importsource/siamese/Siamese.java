@@ -2,11 +2,10 @@ package com.importsource.siamese;
 
 import java.util.List;
 
-import javax.swing.plaf.basic.BasicBorders.SplitPaneBorder;
-
 import com.importsource.log.client.LogManager;
 import com.importsource.log.core.Logger;
 import com.importsource.siamese.service.DefaultService;
+import com.importsource.siamese.watcher.EventType;
 import com.importsource.siamese.watcher.WatchedEvent;
 import com.importsource.siamese.watcher.Watcher;
 
@@ -18,7 +17,8 @@ import com.importsource.siamese.watcher.Watcher;
 public class Siamese {
 	private  Logger logger = LogManager.getLogger(Client.class);
 	
-	DefaultService defaultService =SiameseRPC.getSiameseProxy(DefaultService.class);
+	protected DefaultService defaultService =SiameseRPC.getSiameseProxy(DefaultService.class);
+	protected WatchedEvent event;
 	
 	/**
 	 * 新建一个siamese实例
@@ -28,15 +28,17 @@ public class Siamese {
 	 */
 	public Siamese(String host, int timeout, Watcher watcher) {
 		defaultService=SiameseRPC.getSiameseProxy(DefaultService.class, getIp(host), getPort(host));
-		WatchedEvent subject = new WatchedEvent();
-	    subject.attach(watcher);
+		event = new WatchedEvent();
+		event.attach(watcher);
+		event.setSiamese(this);
+	   // defaultService.attach(watcher);
 	}
 	
 	
 	private int getPort(String host) {
 		String[] hostArr=split(host);
 		if(hostArr.length==2){
-			return Integer.parseInt(hostArr[0]);
+			return Integer.parseInt(hostArr[1]);
 		}
 		return -1;
 	}
@@ -48,7 +50,7 @@ public class Siamese {
 	private String getIp(String host) {
 		String[] hostArr=split(host);
 		if(hostArr.length==2){
-			return hostArr[1];
+			return hostArr[0];
 		}
 		return "-1";
 	}
@@ -104,6 +106,7 @@ public class Siamese {
 
 	public void delete(String key, int i) {
 		defaultService.remove(key);
+		event.setEventType(EventType.NodeDeleted);
 		
 	}
 

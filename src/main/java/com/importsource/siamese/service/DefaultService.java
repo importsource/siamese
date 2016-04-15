@@ -2,9 +2,10 @@ package com.importsource.siamese.service;
 
 
 import java.util.List;
-import java.util.Map.Entry;
 
 import com.importsource.siamese.SNode;
+import com.importsource.siamese.watcher.WatchedEvent;
+import com.importsource.siamese.watcher.Watcher;
 
 /**
  * 这个服务主要负责siamese的基本操作
@@ -46,4 +47,9 @@ public interface DefaultService {
      * @return String 节点信息
      */
     public SNode get(String key);
+    
+    public void attach(Watcher watcher);
+    
+    public void process(WatchedEvent event);
+
 }
