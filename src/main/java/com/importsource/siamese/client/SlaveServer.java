@@ -6,7 +6,6 @@ import com.importsource.rpc.RPC;
 import com.importsource.rpc.entity.ServiceInfo;
 import com.importsource.rpc.support.Server;
 import com.importsource.siamese.DefaultScannerUtil;
-import com.importsource.siamese.watcher.AppWatcher;
 import com.importsource.siamese.watcher.Watcher;
 
 /**
@@ -21,8 +20,6 @@ public class SlaveServer {
 		server.setPort(20383);
 		List<ServiceInfo> services=DefaultScannerUtil.scan();
 		server.register(services);
-		//注册监听器
-	    server.register(Watcher.class, AppWatcher.class);
 		server.start();
 	}
 }

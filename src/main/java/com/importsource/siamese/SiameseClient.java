@@ -12,9 +12,10 @@ public class SiameseClient {
 	public static void main(String[] args) {
 
 		// 创建一个Siamese实例，第一个参数为目标服务器地址和端口，第二个参数为Session超时时间，第三个为节点变化时的回调方法
-		Siamese zk = new Siamese("127.0.0.1:20382", 500000, new Watcher() {
+		Siamese siamese = new Siamese("127.0.0.1:20382", 500000, new Watcher() {
 			// 监控所有被触发的事件
 			public void process(WatchedEvent event) {
+				//当事件被触发就去做下面的逻辑
 				System.out.println("hahahah");
 				System.out.println(event.getSiamese().getChildren("root", false));
 			}
@@ -33,10 +34,10 @@ public class SiameseClient {
 		sNode6.setParent("root");
 		sNode6.setName("app6");
 		sNode6.setLabel("label6");
-		zk.create("app4", sNode4);
-		zk.create("app5", sNode5);
-		zk.create("app6", sNode6);
-		zk.delete("app4", 0);
+		siamese.create("app4", sNode4);
+		siamese.create("app5", sNode5);
+		siamese.create("app6", sNode6);
+		siamese.delete("app4", 0);
 		// 创建一个节点root，数据是mydata,不进行ACL权限控制，节点为永久性的(即客户端shutdown了也不会消失)
 	    //zk.create("/root", "mydata".getBytes(), Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
 

@@ -6,7 +6,6 @@ import java.util.List;
 import com.importsource.siamese.MapTree;
 import com.importsource.siamese.SNode;
 import com.importsource.siamese.SiameseRPC;
-import com.importsource.siamese.watcher.AppWatcher;
 import com.importsource.siamese.watcher.WatchedEvent;
 import com.importsource.siamese.watcher.Watcher;
 import com.importsource.siamese.watcher.WatcherPool;
