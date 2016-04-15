@@ -20,6 +20,23 @@ public class Siamese {
 	protected DefaultService defaultService =SiameseRPC.getSiameseProxy(DefaultService.class);
 	protected WatchedEvent event;
 	
+	
+	/**
+	 * 新建一个siamese实例
+	 */
+	public Siamese(){
+		defaultService=SiameseRPC.getSiameseProxy(DefaultService.class);
+	}
+	
+	/**
+	 * 新建一个siamese实例
+	 * @param host 服务器ip
+	 * @param port 服务器端口
+	 */
+    public Siamese(String host,int port) {
+		defaultService=SiameseRPC.getSiameseProxy(DefaultService.class, host, port);
+	}
+	
 	/**
 	 * 新建一个siamese实例
 	 * @param host 服务器ip和端口
@@ -27,6 +44,20 @@ public class Siamese {
 	 * @param watcher 设置监控
 	 */
 	public Siamese(String host, int timeout, Watcher watcher) {
+		defaultService=SiameseRPC.getSiameseProxy(DefaultService.class, getIp(host), getPort(host),timeout);
+		event = new WatchedEvent();
+		event.attach(watcher);
+		event.setSiamese(this);
+	   // defaultService.attach(watcher);
+	}
+	
+	/**
+	 * 新建一个siamese实例
+	 * @param host 服务器ip和端口
+	 * @param timeout 超时时间
+	 * @param watcher 设置监控
+	 */
+	public Siamese(String host,Watcher watcher) {
 		defaultService=SiameseRPC.getSiameseProxy(DefaultService.class, getIp(host), getPort(host));
 		event = new WatchedEvent();
 		event.attach(watcher);
@@ -65,27 +96,6 @@ public class Siamese {
 		return host.split(":");
 	}
 
-
-	/**
-	 * 新建一个siamese实例
-	 * @param host 服务器ip
-	 * @param port 服务器端口
-	 */
-    public Siamese(String host,int port) {
-		defaultService=SiameseRPC.getSiameseProxy(DefaultService.class, host, port);
-	}
-	
-	
-	
-	/**
-	 * 现在就用这个就可以了
-	 */
-	public Siamese(){
-		super();
-	}
-
-	
-
 	public void create(String key, SNode sNode) {
 		defaultService.add(key, sNode);
 	}
@@ -106,8 +116,9 @@ public class Siamese {
 
 	public void delete(String key, int i) {
 		defaultService.remove(key);
-		event.setEventType(EventType.NodeDeleted);
-		
+		if(null!=event){
+			event.setEventType(EventType.NodeDeleted);
+		}
 	}
 
 	public void close() {

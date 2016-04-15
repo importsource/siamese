@@ -33,10 +33,10 @@ public class SiameseClient {
 		sNode6.setParent("root");
 		sNode6.setName("app6");
 		sNode6.setLabel("label6");
-		zk.create("app7", sNode4);
-		zk.create("app8", sNode5);
-		zk.create("app9", sNode6);
-		zk.delete("app9", 0);
+		zk.create("app4", sNode4);
+		zk.create("app5", sNode5);
+		zk.create("app6", sNode6);
+		zk.delete("app4", 0);
 		// 创建一个节点root，数据是mydata,不进行ACL权限控制，节点为永久性的(即客户端shutdown了也不会消失)
 	    //zk.create("/root", "mydata".getBytes(), Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
 
