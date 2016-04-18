@@ -21,5 +21,50 @@
 		<name>clog.file.pre</name>
 		<value>test</value>
 	</property>
+	
+	
+	<property>
+		<name>importsource.siamese.tickTime</name>
+		<value>2000</value>
+	</property>
+	
+	
+	<!-- siamese 基本配置 -->
+	<property>
+		<name>importsource.siamese.tickTime</name>
+		<value>2000</value>
+	</property>
+	<property>
+		<name>importsource.siamese.initLimit</name>
+		<value>5</value>
+	</property>
+	<property>
+		<name>importsource.siamese.syncLimit</name>
+		<value>2</value>
+	</property>
+	<property>
+		<name>importsource.siamese.dataDir</name>
+		<value>/Users/apple/siamese0/data</value>
+	</property>
+	<property>
+		<name>importsource.siamese.dataLogDir</name>
+		<value>/Users/apple/siamese0/logs</value>
+	</property>
+	<property>
+		<name>importsource.siamese.clientPort</name>
+		<value>4180</value>
+	</property>
+	<property>
+		<name>importsource.siamese.servers</name>
+		<value>
+		server.0=127.0.0.1:8880:7770,    
+        server.1=127.0.0.1:8881:7771,
+        server.2=127.0.0.1:8882:7772
+		
+		</value>
+	</property>
+	
+	 
+ 
 
 </configuration>

@@ -41,20 +41,4 @@ public class DefaultServiceImpl implements DefaultService {
 		return MapTree.get(key);
 	}
 
-	public void attach(Watcher watcher) {
-		WatchedEvent event=new WatchedEvent();
-		event.attach(watcher);
-		
-		System.out.println("WatcherPool.observers.size():"+WatcherPool.observers.size());
-		
-	}
-
-	public void process(WatchedEvent event) {
-		
-		
-	}
-
-	
-	
-
 }

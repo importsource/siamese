@@ -47,9 +47,4 @@ public interface DefaultService {
      * @return String 节点信息
      */
     public SNode get(String key);
-    
-    public void attach(Watcher watcher);
-    
-    public void process(WatchedEvent event);
-
 }

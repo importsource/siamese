@@ -15,9 +15,9 @@ public class My {
 	/**
 	 * 本地缓存的自己的id
 	 */
-	public static int myid=2;
+	public static int myid=1;
 	/**
-	 * 自己的状态 （ LEADING, FLLOWING ）
+	 * 自己的状态 （ LEADING, FLLOWING 等 ）
 	 */
 	public static ServerState myServerState;
 	/**

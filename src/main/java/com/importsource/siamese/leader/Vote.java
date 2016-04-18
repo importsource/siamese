@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
-import org.dom4j.util.SingletonStrategy;
 
 /**
  * 1、收集第一轮投票结果
@@ -34,7 +33,7 @@ public class Vote {
 
 		Notification nf = new Notification();
 		nf.id = 1;
-		nf.leader = 2;
+		nf.leader = 1;
 		nf.txid = 1;
 
 		Notification nf1 = new Notification();
@@ -44,32 +43,32 @@ public class Vote {
 
 		Notification nf2 = new Notification();
 		nf2.id = 3;
-		nf2.leader = 2;
+		nf2.leader = 3;
 		nf2.txid = 3;
 
 		Notification nf3 = new Notification();
 		nf3.id = 4;
-		nf3.leader = 2;
+		nf3.leader = 4;
 		nf3.txid = 4;
 
 		Notification nf4 = new Notification();
 		nf4.id = 5;
-		nf4.leader = 2;
+		nf4.leader = 5;
 		nf4.txid = 5;
 
 		Notification nf5 = new Notification();
 		nf5.id = 6;
-		nf5.leader = 2;
+		nf5.leader = 6;
 		nf5.txid = 6;
 
 		Notification nf6 = new Notification();
 		nf6.id = 7;
-		nf6.leader = 2;
+		nf6.leader = 7;
 		nf6.txid = 7;
 
 		Notification nf7 = new Notification();
 		nf7.id = 8;
-		nf7.leader = 2;
+		nf7.leader = 8;
 		nf7.txid = 8;
 
 		vote.put(1, nf);
@@ -117,10 +116,10 @@ public class Vote {
 		// 如果投票数超过1/2则选该id为leader
 		// TODO 暂时用这个来替代 if (a / (My.serverList.size() * 1.0) > 1 / 2.0) {
 		System.out.println("a:" + a);
-		System.out.println("a / (15 * 1.0) > 1 / 2.0:" + (a / (15 * 1.0) > 1 / 2.0));
+		System.out.println("a / (11 * 1.0) > 1 / 2.0:" + (a / (15 * 1.0) > 1 / 2.0));
 		System.out.println("l:" + l);
 
-		if (a / (15 * 1.0) > 1 / 2.0) {
+		if (a / (10 * 1.0) > 1 / 2.0) {
 			// 选出leader
 			return l;
 		}
